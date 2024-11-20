@@ -4,6 +4,16 @@ This session and overall series was developed to show users interested in unders
 
 #### OAC Version: September 2024
 ___
+### Dataset Details
+For this webinar, we used an XLSX file.  We've included the file if want to follow along with the video.  
+
+To start, download the xlsx file here.  Once downloaded, log into your Oracle Analytics Cloud(OAC) instance.  
+
+To start the import, simply drag the file onto the home page of OAC and the import process will start automatically!
+
+**Note:** *You must be a developer and have the appropriate permissions to upload files into your environment.*
+
+___
 ### Augmented Features
 For this intitial session, we briefly covered some of the native augemented features.
 
