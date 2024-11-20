@@ -27,7 +27,7 @@ ___
 We quickly demo the Workbook that we are going to build during the remainder of the session.  
 ___
 ### Dashboard Building Begins: 13:20 
-Now we get into the rebuilding of the dashboard....from scratch.  I've captured the various use-cases and marked the times below to help you navigate to the content you're most interested in.  
+Now we get into the development of the dashboard....from scratch.  I've captured the various use-cases and marked the times below to help you navigate to the content you're most interested in.  
 
 #### Parameters: 13:45 [Documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/create-and-use-parameters.html)  
 
