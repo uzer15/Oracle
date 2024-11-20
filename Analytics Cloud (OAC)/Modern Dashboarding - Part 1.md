@@ -7,7 +7,7 @@ ___
 ### Dataset Details
 For this webinar, we used an XLSX file.  We've included the file if want to follow along with the video.  
 
-To start, download the xlsx file here.  Once downloaded, log into your Oracle Analytics Cloud(OAC) instance.  
+To start, download the file [here](https://github.com/uzer15/Oracle/blob/main/Analytics%20Cloud%20(OAC)/Sample%20Data.xlsx).  Once downloaded, log into your Oracle Analytics Cloud(OAC) instance.  
 
 To start the import, simply drag the file onto the home page of OAC and the import process will start automatically!
 
