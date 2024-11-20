@@ -7,4 +7,4 @@ Building end-to-end modern dashboards with Oracle Analytics Cloud - Part 1
 [Watch on YouTube](https://www.youtube.com/watch?v=zW1uo1LhU7g)  
 
   
-Building end-to-end modern dashboards with Oracle Analytics Cloud - Part 1  (Coming Soon)
+Building end-to-end modern dashboards with Oracle Analytics Cloud - Part 2  (Coming Soon)
