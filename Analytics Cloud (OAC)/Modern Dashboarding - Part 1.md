@@ -2,40 +2,37 @@ Thanks for stopping by to understand what we covered in our first OAC Modern Das
 
 This session and overall series was developed to show users interested in understanding how to construct dashboards covering common use-cases and highlighting features to help tell their data stories and provide business value to their consumers.
 
-
 #### OAC Version: September 2024
+___
+### Augmented Features
+For this intitial session, we briefly covered some of the native augemented features.
 
-
-For this intitial session, we briefly covered some of the native augemented features;
-
-#### Explain Feature: 1:58 [Documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/use-explain-understand-your-data.html)  
+#### Explain: 1:58 [Documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/use-explain-understand-your-data.html)  
 
 #### Auto-Insights: 3:40 [Documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/use-auto-insights-understand-your-data.html)  
 
 #### AI Assistant: 5:14 [Documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/generate-visualizations-oracle-analytics-ai-assistant-and-home-page-ask.html)  
-
-Next up, we quickly demo the Workbook that we are going to build during the remainder of the session.  
-
+___
 ### Dashboard Review: 7:20  
-
+We quickly demo the Workbook that we are going to build during the remainder of the session.  
+___
+### Dashboard Building Begins: 13:20 
 Now we get into the rebuilding of the dashboard....from scratch.  I've captured the various use-cases and marked the times below to help you navigate to the content you're most interested in.  
-
-### Dashboard Building Begins: 13:20  
 
 #### Parameters: 13:45 [Documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/create-and-use-parameters.html)  
 
 #### Parameter Binding: 30:47 [Documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/bind-parameters-filters.html)
 
-#### Display % Of in a Table: 35:42 
+#### Display '% of' in a Table: 35:42 
 
-#### Ago Function (for building Time over Time calculations): 38:00 [Documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/functions.html#GUID-85E0FDF7-BF01-49CB-BAE0-55A19BA33737)  
-
+#### Ago Function: 38:00 [Documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/functions.html#GUID-85E0FDF7-BF01-49CB-BAE0-55A19BA33737)
+ - For creating Time over Time calculations (Example: Month over Month)
 #### Conditional Formatting: 39:20 [Documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/highlight-important-data-events-conditional-formatting.html)  
 
-#### One-Click Statistics (Forecasting, Clustering, Outliers, Trending, Reference Lines): 44:05 [Documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/enhance-visualizations-statistical-analytics.html#GUID-87DD71E5-9AFC-405C-A812-6EF9FEE96454) 
-
+#### One-Click Statistics: 44:05 [Documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/enhance-visualizations-statistical-analytics.html#GUID-87DD71E5-9AFC-405C-A812-6EF9FEE96454) 
+ - Forecasting, Clustering, Outliers, Trending, Reference Lines
 #### Data Actions: 51:10 [Documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acubi/use-data-actions.html) 
-
+___
 ### Code Innovate Program: 55:11  
 
 More about the Code Innovate Program [Oracle Developers](https://www.oracle.com/developer/community/code-innovate-developers/)
