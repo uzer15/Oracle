@@ -9,8 +9,9 @@ For this webinar, we used an XLSX file.  We've included the file if want to foll
 
 To start, download the file [here](https://github.com/uzer15/Oracle/blob/main/Analytics%20Cloud%20(OAC)/Sample%20Data.xlsx).  Once downloaded, log into your Oracle Analytics Cloud(OAC) instance.  
 
-To start the import, simply drag the file onto the home page of OAC and the import process will start automatically!
-![Dataset Import]
+To start the import, simply drag the file onto the home page of OAC and the import process will start automatically!  
+
+![Dataset Import](/Analytics Cloud (OAC)/Images/Import Dataset.png "Data Import Screen")
 
 **Note:** *You must be a developer and have the appropriate permissions to upload files into your environment.*
 
