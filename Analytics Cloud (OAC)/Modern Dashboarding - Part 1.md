@@ -15,6 +15,10 @@ To start the import, simply drag the file onto the home page of OAC and the impo
 
 Click **Visualize** to load the file and open up the Workbook editor.
 
+![Visualize](</Analytics Cloud (OAC)/Images/WorkbookEditor.png> "Workbook Editor")  
+
+You are now ready to start building!!
+
 **Note:** *You must be a developer and have the appropriate permissions to upload files into your environment.*
 
 ___
