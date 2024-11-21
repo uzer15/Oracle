@@ -11,7 +11,7 @@ To start, download the file [here](https://github.com/uzer15/Oracle/blob/main/An
 
 To start the import, simply drag the file onto the home page of OAC and the import process will start automatically!  
 
-![Dataset Import]('/Analytics Cloud (OAC)/Images/Import Dataset.png' "Data Import Screen")
+![Dataset Import](/Images/ImportDataset.png "Data Import Screen")
 
 **Note:** *You must be a developer and have the appropriate permissions to upload files into your environment.*
 
