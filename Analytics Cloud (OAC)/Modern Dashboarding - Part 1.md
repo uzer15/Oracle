@@ -17,7 +17,7 @@ Click **Visualize** to load the file and open up the Workbook editor.
 
 ![Visualize](</Analytics Cloud (OAC)/Images/WorkbookEditor.png> "Workbook Editor")  
 
-You are now ready to start building!!
+You are now ready to start building!
 
 **Note:** *You must be a developer and have the appropriate permissions to upload files into your environment.*
 
@@ -33,6 +33,8 @@ For this intitial session, we briefly covered some of the native augemented feat
 ___
 ### Dashboard Review: 7:20  
 We quickly demo the Workbook that we are going to build during the remainder of the session.  
+
+![Demo Dashboard](</Analytics Cloud (OAC)/Images/Dashboard.png> "Dashboard")
 ___
 ### Dashboard Building Begins: 13:20 
 Now we get into the development of the dashboard....from scratch.  I've captured the various use-cases and marked the times below to help you navigate to the content you're most interested in.  
