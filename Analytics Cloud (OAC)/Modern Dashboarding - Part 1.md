@@ -47,5 +47,5 @@ Now we get into the development of the dashboard....from scratch.  I've captured
 ___
 ### Code Innovate Program: 55:11  
 
-More about the Code Innovate Program [Oracle Developers](https://www.oracle.com/developer/community/code-innovate-developers/)
-[YouTube Channel](https://www.youtube.com/watch?v=zW1uo1LhU7g) 
+More about the Code Innovate Program [Oracle Developers](https://www.oracle.com/developer/community/code-innovate-developers/)  
+Code Innovate videos on [YouTube](https://www.youtube.com/watch?v=zW1uo1LhU7g) 
