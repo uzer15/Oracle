@@ -113,9 +113,9 @@ Below are some links to documentation that we mentioned during the webinar
  - APEX provides views to help understand every aspect of the Workflow engine. [Documentation](https://docs.oracle.com/en/database/oracle/apex/24.2/htmdb/workflow-views.html#GUID-851AB064-5B41-432F-9CAF-00CF78D975E4)
 
 Here are the example SQL statements for APEX views we utilized
-> SELECT * FROM APEX_WORKFLOWS WHERE APPLICATION_ID = 500
->
-> SELECT * FROM APEX_WORKFLOW_ACTIVITIES WHERE WORKFLOW_ID = 21648550992363173 ORDER BY START_TIME
+
+        SELECT * FROM APEX_WORKFLOWS WHERE APPLICATION_ID = 500
+        SELECT * FROM APEX_WORKFLOW_ACTIVITIES WHERE WORKFLOW_ID = 21648550992363173 ORDER BY START_TIME
 
 
 ##### APEX Workflow Substitution Strings
@@ -126,3 +126,13 @@ Here are the example SQL statements for APEX views we utilized
 
 **Note:** *We utilized the START_WORKFLOW function*
 
+##### APEX In-Email Approvals
+ - Blog posting describing alternative method for configuring in-email approvals [Blog](https://blogs.oracle.com/apex/post/accelerate-decisionmaking-with-inemail-approvals-in-oracle-apex-workflows?source=:so:fb:or:awr:odv:::&SC=:so:fb:or:awr:odv:::&pcode=)
+
+___
+### Code Innovate Program
+
+More about the Code Innovate Program [Oracle Developers](https://www.oracle.com/developer/community/code-innovate-developers/)  
+Code Innovate videos on [YouTube](https://www.youtube.com/watch?v=zW1uo1LhU7g)  
+
+If you're interested in learning more about the program, email us at **codeinnovate_us_grp@oracle.com** and one of our engineers will get in touch with you.
