@@ -10,92 +10,92 @@ ___
 
 ### PL/SQL used to initiate workflow from outside of application
 
-    SET SERVEROUTPUT ON;
-    
-    DECLARE
+        SET SERVEROUTPUT ON;
         
-        --API Endpoint and Criteria
-        api_Domain_URL      varchar2(500)  := '{Domain_URL}';
-        api_Endpoint        varchar2(500)  := '{API_Endpoint}';
-        group_ocid          varchar2(500)  := 'ocid1.group.oc1..';
+        DECLARE
+            
+            --API Endpoint and Criteria
+            api_Domain_URL      varchar2(500)  := '{Domain_URL}';
+            api_Endpoint        varchar2(500)  := '{API_Endpoint}';
+            group_ocid          varchar2(500)  := 'ocid1.group.oc1..';
+            
+            --Sets database Credentials File
+            cred_name           varchar2(4000) := '{enter credential name}';
         
-        --Sets database Credentials File
-        cred_name           varchar2(4000) := '{enter credential name}';
-    
-        --Capture API Response
-        resp_group          dbms_cloud_types.RESP;
-        l_clob_group        CLOB;
+            --Capture API Response
+            resp_group          dbms_cloud_types.RESP;
+            l_clob_group        CLOB;
+            
+            --To store User's Email Address
+            l_username          varchar2(150);
+            
+        BEGIN
+        --Make REST call to get members of a (domain) group
+            resp_group := dbms_cloud.send_request(
+                credential_name => cred_name,
+                uri => api_Domain_URL || api_Endpoint || group_ocid || '?attributes=members',
+                method => dbms_cloud.METHOD_GET
+            );
         
-        --To store User's Email Address
-        l_username          varchar2(150);
+        --Set JSON response
+            l_clob_group := dbms_cloud.get_response_text(resp_group);
+            
+        --Displays raw JSON response
+            --dbms_output.put_line(l_clob_group); 
         
-    BEGIN
-    --Make REST call to get members of a (domain) group
-        resp_group := dbms_cloud.send_request(
-            credential_name => cred_name,
-            uri => api_Domain_URL || api_Endpoint || group_ocid || '?attributes=members',
-            method => dbms_cloud.METHOD_GET
-        );
-    
-    --Set JSON response
-        l_clob_group := dbms_cloud.get_response_text(resp_group);
+        --Determine which users are not in the Control Table (SYSTEM_ACCESS_REQUESTS)
+            FOR i IN (
+                SELECT g.name as User_ID
+                FROM
+                JSON_TABLE(l_clob_group,'$.members[*]'
+                COLUMNS
+                    (row_number FOR ORDINALITY,
+                    name VARCHAR2(150) PATH '$.name')) 
+                AS g
+                WHERE g.name NOT IN (SELECT USER_NAME FROM WKSP_APRCC.SYSTEM_ACCESS_REQUESTS)
+            ) LOOP
         
-    --Displays raw JSON response
-        --dbms_output.put_line(l_clob_group); 
-    
-    --Determine which users are not in the Users Management Table
-        FOR i IN (
-            SELECT g.name as User_ID
-            FROM
-            JSON_TABLE(l_clob_group,'$.members[*]'
-            COLUMNS
-                (row_number FOR ORDINALITY,
-                name VARCHAR2(150) PATH '$.name')) 
-            AS g
-            WHERE g.name NOT IN (SELECT USER_NAME FROM WKSP_APRCC.SYSTEM_ACCESS_REQUESTS)
-        ) LOOP
-    
-    --Set Current User
-        SELECT i.User_ID INTO l_username FROM dual;
-    
-    --Display User Name 
-        dbms_output.put_line(l_username);
-    
-    --Trigger APEX Workflow Start
-            DECLARE
-               l_workflow_id    number;
-               l_app_id         number:= 500;
+        --Set Current User
+            SELECT i.User_ID INTO l_username FROM dual;
         
-            BEGIN
-            --Create Session
-                apex_session.create_session (
-                    p_app_id   => l_app_id,
-                    p_page_id  => 1,
-                    p_username => '{Enter Authorized APEX User Name}' );
-                    
-            --print current App ID and Session ID
-                --sys.dbms_output.put_line ('App is '||v('APP_ID')||', session is '||v('APP_SESSION'));        
-    
-                l_workflow_id := apex_workflow.start_workflow (
-                    p_application_id => l_app_id,
-                    p_static_id      => 'User_Access_Workflow',
-                    p_detail_pk      => l_username,
-                    p_parameters     => apex_workflow.t_workflow_parameters(
-                        1 => apex_workflow.t_workflow_parameter(static_id => 'USER_NAME',   string_value => l_username)
-                   ));
-                   
-                --NOTE: APEX Workflow MUST be activated when using this API
-    
-            --Delete Session
-                apex_session.delete_session (
-                    p_session_id   => v('APP_SESSION') );
-                    
-            END;
-    
-        END Loop;
-    
-    END;
-    /
+        --Display User Name 
+            dbms_output.put_line(l_username);
+        
+        --Trigger APEX Workflow Start
+                DECLARE
+                   l_workflow_id    number;
+                   l_app_id         number:= 500;
+            
+                BEGIN
+                --Create Session
+                    apex_session.create_session (
+                        p_app_id   => l_app_id,
+                        p_page_id  => 1,
+                        p_username => '{Enter Authorized APEX User Name}' );
+                        
+                --print current App ID and Session ID
+                    --sys.dbms_output.put_line ('App is '||v('APP_ID')||', session is '||v('APP_SESSION'));        
+        
+                    l_workflow_id := apex_workflow.start_workflow (
+                        p_application_id => l_app_id,
+                        p_static_id      => 'User_Access_Workflow',
+                        p_detail_pk      => l_username,
+                        p_parameters     => apex_workflow.t_workflow_parameters(
+                            1 => apex_workflow.t_workflow_parameter(static_id => 'USER_NAME',   string_value => l_username)
+                       ));
+                       
+                    --NOTE: APEX Workflow MUST be activated when using this API
+        
+                --Delete Session
+                    apex_session.delete_session (
+                        p_session_id   => v('APP_SESSION') );
+                        
+                END;
+        
+            END Loop;
+        
+        END;
+        /
 
 ### PL/SQL used for....
 
