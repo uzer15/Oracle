@@ -100,16 +100,16 @@ ___
 ### PL/SQL used for....
 
 ___
-#### Mentioned Links
+### Mentioned Links
 Below are some links to documentation that we mentioned during the webinar
 
-##### Database Credentials
+#### Database Credentials
  - Required when working with OCI resources to authenticate the request. [Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-subprograms.html#GUID-742FC365-AA09-48A8-922C-1987795CF36A)
 
-##### JSON Functions
+#### JSON Functions
  - Very useful when working with JSON files and responses. We utilized the JSON_TABLE function, but many other JSON functions are available. [Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/JSON_TABLE.html)
 
-##### APEX Workflow Runtime Views
+#### APEX Workflow Runtime Views
  - APEX provides views to help understand every aspect of the Workflow engine. [Documentation](https://docs.oracle.com/en/database/oracle/apex/24.2/htmdb/workflow-views.html#GUID-851AB064-5B41-432F-9CAF-00CF78D975E4)
 
 Here are the example SQL statements for APEX views we utilized
@@ -118,7 +118,7 @@ Here are the example SQL statements for APEX views we utilized
         SELECT * FROM APEX_WORKFLOW_ACTIVITIES WHERE WORKFLOW_ID = 21648550992363173 ORDER BY START_TIME
 
 
-##### APEX Workflow Substitution Strings
+#### APEX Workflow Substitution Strings
  - Substitution Strings are used to pass information about a workflow to an Oracle APEX page. [Documentation](https://docs.oracle.com/en/database/oracle/apex/24.2/htmdb/workflow-substitution-strings.html#GUID-110A2DE8-0586-45E3-A439-D3D56425FE10)
 
 ##### APEX Workflow APIs
@@ -126,7 +126,7 @@ Here are the example SQL statements for APEX views we utilized
 
 **Note:** *We utilized the START_WORKFLOW function*
 
-##### APEX In-Email Approvals
+#### APEX In-Email Approvals
  - Blog posting describing alternative method for configuring in-email approvals [Blog](https://blogs.oracle.com/apex/post/accelerate-decisionmaking-with-inemail-approvals-in-oracle-apex-workflows?source=:so:fb:or:awr:odv:::&SC=:so:fb:or:awr:odv:::&pcode=)
 
 ___
