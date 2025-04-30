@@ -394,6 +394,6 @@ ___
 ### Code Innovate Program
 
 More about the Code Innovate Program [Oracle Developers](https://www.oracle.com/developer/community/code-innovate-developers/)  
-Code Innovate videos on [YouTube](https://www.youtube.com/watch?v=zW1uo1LhU7g)  
+Code Innovate videos on [YouTube](https://www.youtube.com/playlist?list=PLPIzp-E1msrZMCfSHbKgLK3KWsNM9JB9a)  
 
 If you're interested in learning more about the program, email us at **codeinnovate_us_grp@oracle.com** and one of our engineers will get in touch with you.
