@@ -395,6 +395,8 @@ Configure Schedule
 
 ![Database Actions](</APEX/Images/Set up Mode.png> "Database Actions")
 
+At this point, you should be able to save the job and you use the same area to monitor the job to ensure it's running as expected.
+
 </details>
 
 ___
