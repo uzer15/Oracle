@@ -371,15 +371,29 @@ To anyone that stumbled across this section of the repo, apologies for not cover
 
 I'll be using the Scheduling service within Database Actions of an Autonomous Data Warehouse 23ai.
 
-Start by logging into the database within OCI.  Open up Database Actions 
+Start by logging into the database within OCI.  Open up Database Actions and select Scheduling
 
 ![Database Actions](</APEX/Images/DA - Scheduling.png> "Database Actions")
 
-Select Scheduling
-![Database Actions](</APEX/Images/DA - Scheduling-Home.png> "Database Actions")
-
 Select Create Job
 
+![Database Actions](</APEX/Images/DA - Scheduling-Home.png> "Database Actions")
+
+This will open the job details page
+
+![Database Actions](</APEX/Images/Create Job.png> "Database Actions")
+
+Give the job a name and paste your PL/SQL script
+
+![Database Actions](</APEX/Images/Enter Details.png> "Database Actions")
+
+Select Execution Mode
+
+![Database Actions](</APEX/Images/Select Execution Mode.png> "Database Actions")
+
+Configure Schedule
+
+![Database Actions](</APEX/Images/Set up Mode.png> "Database Actions")
 
 </details>
 
