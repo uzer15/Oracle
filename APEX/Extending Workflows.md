@@ -425,7 +425,7 @@ Here are the example SQL statements for APEX views we utilized
 ##### APEX Workflow APIs
  - Listing of available Workflow related APIs. [Documentation](https://docs.oracle.com/en/database/oracle/apex/23.2/aeapi/APEX_WORKFLOW.START_WORKFLOW-Function.html#GUID-EC513C91-8A56-46FD-A25D-16A9BF071804)
 
-**Note:** *We utilized the START_WORKFLOW function*
+>**Note:** *We utilized the START_WORKFLOW function*
 
 #### APEX In-Email Approvals
  - Blog posting describing alternative method for configuring in-email approvals. [Blog](https://blogs.oracle.com/apex/post/accelerate-decisionmaking-with-inemail-approvals-in-oracle-apex-workflows?source=:so:fb:or:awr:odv:::&SC=:so:fb:or:awr:odv:::&pcode=)
