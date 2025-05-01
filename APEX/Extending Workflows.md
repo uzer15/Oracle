@@ -371,9 +371,15 @@ To anyone that stumbled across this section of the repo, apologies for not cover
 
 I'll be using the Scheduling service within Database Actions of an Autonomous Data Warehouse 23ai.
 
-Start by logging into the database within OCI.  Open up Database Actions and select 
+Start by logging into the database within OCI.  Open up Database Actions 
 
-![Database Actions](</Analytics Cloud (OAC)/Images/ImportDataset.png> "Database Actions")
+![Database Actions](</APEX/Images/DA - Scheduling.png> "Database Actions")
+
+Select Scheduling
+![Database Actions](</APEX/Images/DA - Scheduling-Home.png> "Database Actions")
+
+Select Create Job
+
 
 </details>
 
