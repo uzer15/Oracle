@@ -361,6 +361,23 @@ ___
 </details>
 
 ___
+### Scheduling a Database Job
+
+<details>
+ 
+<summary> Step-by-step instructions on how to create a database job </summary>
+ 
+To anyone that stumbled across this section of the repo, apologies for not covering this during the demo.  That was part of the plan, but was running short on time.  I've outlined the steps necessary to setup a re-occurring job that will run your PL/SQL and initiate APEX workflows.
+
+I'll be using the Scheduling service within Database Actions of an Autonomous Data Warehouse 23ai.
+
+
+
+
+</details>
+
+___
+
 ### Mentioned Links
 Below are some links to documentation that we mentioned during the webinar
 
@@ -383,13 +400,15 @@ Here are the example SQL statements for APEX views we utilized
  - Substitution Strings are used to pass information about a workflow to an Oracle APEX page. [Documentation](https://docs.oracle.com/en/database/oracle/apex/24.2/htmdb/workflow-substitution-strings.html#GUID-110A2DE8-0586-45E3-A439-D3D56425FE10)
 
 ##### APEX Workflow APIs
- - Listing of available Workflow related APIs [Documentation](https://docs.oracle.com/en/database/oracle/apex/23.2/aeapi/APEX_WORKFLOW.START_WORKFLOW-Function.html#GUID-EC513C91-8A56-46FD-A25D-16A9BF071804)
+ - Listing of available Workflow related APIs. [Documentation](https://docs.oracle.com/en/database/oracle/apex/23.2/aeapi/APEX_WORKFLOW.START_WORKFLOW-Function.html#GUID-EC513C91-8A56-46FD-A25D-16A9BF071804)
 
 **Note:** *We utilized the START_WORKFLOW function*
 
 #### APEX In-Email Approvals
- - Blog posting describing alternative method for configuring in-email approvals [Blog](https://blogs.oracle.com/apex/post/accelerate-decisionmaking-with-inemail-approvals-in-oracle-apex-workflows?source=:so:fb:or:awr:odv:::&SC=:so:fb:or:awr:odv:::&pcode=)
+ - Blog posting describing alternative method for configuring in-email approvals. [Blog](https://blogs.oracle.com/apex/post/accelerate-decisionmaking-with-inemail-approvals-in-oracle-apex-workflows?source=:so:fb:or:awr:odv:::&SC=:so:fb:or:awr:odv:::&pcode=)
 
+#### Scheduling
+ - To learn more about scheduling database jobs. [Documention](https://docs.oracle.com/en/database/oracle/sql-developer-web/sdwad/scheduling-page.html)
 ___
 ### Code Innovate Program
 
