@@ -10,8 +10,7 @@ Session link: [Unlock the Full Potential of Your Oracle AI Database Select AI Pr
 
 ___
 #### Download APEX Application
-Download SQL File [here](https://github.com/uzer15/Oracle/blob/main/Analytics%20Cloud%20(OAC)/Sample%20Data.xlsx).
-
+[Download](https://github.com/uzer15/Oracle/blob/main/APEX/Apps/SELECT%AI%Manager.sql)
 ___
 #### Code Snippets
 <details>
