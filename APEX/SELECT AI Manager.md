@@ -10,135 +10,89 @@ ___
 <details>
  <summary> Database Grants to APEX Workspace </summary>
 
-  --Need to be granted as Admin
-  grant execute on DBMS_CLOUD to <Workspace Schema>;
-  grant execute on DBMS_CLOUD_AI to W<Workspace Schema>;
-
-<details>
- <summary> Email Template </summary>
-
-        <html>
-            <head>
-                <meta charset="UTF-8">
-                <title>Task Assignment Notification</title>
-            </head>
-            <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; margin: 0;">
-        
-                <table align="center" width="600" style="background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
-                    <tr>
-                        <td align="center" style="padding-bottom: 20px;">
-                            <h2 style="color: #333;"> New Task Assigned to You!</h2>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td style="color: #555; font-size: 16px; line-height: 1.6; padding: 10px 20px;">
-                            <p>Hello <strong>#USERNAME#</strong>,</p>
-                            <p>You have been assigned a new task: <strong>#SHORT_TASK_DESC#</strong>.</p>
-                            <p><em>#TASK_DESC#</em></p>
-                            <p>Please review the task and click one of the buttons below to approve or reject it.</p>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td align="center" style="padding: 20px;">
-                            <a href="#APPROVE_LINK#" 
-                               style="background-color: #28a745; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-size: 16px; display: inline-block;">
-                               Approve Task
-                            </a>
-                            &nbsp;&nbsp;
-                            <a href="#REJECT_LINK#" 
-                               style="background-color: #dc3545; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-size: 16px; display: inline-block;">
-                               Reject Task
-                            </a>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td style="text-align: center; padding: 20px; font-size: 14px; color: #888;">
-                            <p>If you have any questions, please contact your administrator.</p>
-                            <p>Due Date: <strong>#DUE_DATE#</strong></p>
-                        </td>
-                    </tr>
-        
-                </table>
-        
-            </body>
-            </html>
+    --Need to be granted as Admin
+    grant execute on DBMS_CLOUD to <Workspace Schema>;
+    grant execute on DBMS_CLOUD_AI to W<Workspace Schema>;
+    
 </details>
 
 <details>
- <summary> Task Definition Action </summary>
+ <summary> Credentials </summary>
+
+
+    --Check for Credentials
+     select * from user_credentials;
+    
+    --Create Credential for OCI Hosted Generative AI Models
+     BEGIN
+         DBMS_CLOUD.CREATE_CREDENTIAL (
+         credential_name => 'OCI_CREDENTIAL',
+         user_ocid => '<User OCID>',
+         tenancy_ocid => '<Tenancy OCID>',
+         private_key => '<Private Key>',
+         fingerprint => '<Fingerprint>');
+     END;
+     /
+    
+    --Drop Credential
+     BEGIN
+       DBMS_CLOUD.DROP_CREDENTIAL (
+        credential_name  => 'OCI_CREDENTIAL');
+     END;
+
+</details>
+
+<details>
+ <summary> Supporting Database Ojects </summary>
         
-        Declare l_task_id varchar(500);
-        l_token VARCHAR2(500);
-        l_raw_token RAW(32);
-        l_hash raw(32);
-        l_base_link VARCHAR2(500);
-        l_approval_link VARCHAR2(500);
-        l_reject_link VARCHAR2(500);
-        l_placeholders clob;
-        Begin
-        
-        --create 32 random bytes.Very long secret code string
-        l_raw_token := DBMS_CRYPTO.RANDOMBYTES(32);
-        
-        --random bytes are converted into a hexadecimal string.express data using numbers and letters (0-9 and A-F)
-        --string of characters
-        l_token := RAWTOHEX(l_raw_token);
-        
-        --calculates a SHA‑256 hash of the random bytes
-        --digital fingerprint
-        l_hash := DBMS_CRYPTO.HASH(l_raw_token, DBMS_CRYPTO.HASH_SH256);
-        
-        --get unique task ID for the newly created task
-        l_task_id := :APEX$TASK_ID;
-        INSERT INTO
-            EMAIL_TASK_APPROVALS (
-                TASK_ID,
-                USERNAME,
-                TOKEN_HASH,
-                EXPIRES_AT,
-                USED_FLAG,
-                WORKFLOW_ID
-            )
-        VALUES
-            (
-                l_task_id,
-                'USER_DEV',
-                l_hash,
-                sysdate + 14,
-                'N',
-                TO_CHAR(:APEX$WORKFLOW_ID) --unique identifier of the workflow that initiated this task
-            );
-        
-        l_base_link := 'https://{host}.adb.{region}.oraclecloudapps.com/ords/{Endpoint}';
-        
-        l_approval_link := l_base_link || '?task_id=' || l_task_id || '&token=' || l_token || '&outcome=APPROVED';
-        
-        l_reject_link := l_base_link || '?task_id=' || l_task_id || '&token=' || l_token || '&outcome=REJECTED';
-        
-        l_placeholders := '{ "USERNAME": "USER_DEV", "SHORT_TASK_DESC": "User Creation Request",
-            "TASK_DESC": "Approval with automatically create a new user in the database","APPROVE_LINK": "#APPROVAL_LINK#",
-            "REJECT_LINK": "#REJECT_LINK#","DUE_DATE": "#DUE_DATE#","MY_APPLICATION_LINK": "{APEX App Link}"}';
-        
-        l_placeholders := REPLACE(l_placeholders, '#APPROVAL_LINK#', l_approval_link);
-        
-        l_placeholders := REPLACE(l_placeholders, '#REJECT_LINK#', l_reject_link);
-        
-        l_placeholders := REPLACE(l_placeholders, '#DUE_DATE#', sysdate + 14);
-        
-        apex_mail.send (
-            p_template_static_id = > 'USER_REQUEST_TEMPLATE',
-            p_placeholders = > l_placeholders,
-            p_to = > '{RECIPIENT}',
-            p_from = > '{YOUR APPROVED EMAIL ADDRESS}'
-        );
-        
-        --Send email out of queue
-        APEX_MAIL.PUSH_QUEUE;
-        
-        End;
+   
+    --Available Models
+       CREATE TABLE "SELECT_AI_OCI_MODELS" 
+       (	"MODEL_ID" NUMBER GENERATED BY DEFAULT ON NULL AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  NOT NULL ENABLE, 
+    	"MODEL_NAME" VARCHAR2(100 CHAR) NOT NULL ENABLE, 
+    	"MODEL_DISPLAY_NAME" VARCHAR2(100), 
+    	 CONSTRAINT "OCI_MODELS_PK" PRIMARY KEY ("MODEL_ID")
+      USING INDEX  ENABLE
+       ) ;
+    
+     --Insert Models
+      INSERT INTO SELECT_AI_OCI_MODELS (MODEL_NAME, MODEL_DISPLAY_NAME) VALUES ('meta.llama-3.2-90b-vision-instruct', 'Meta Llama 3.2 Vision');
+      INSERT INTO SELECT_AI_OCI_MODELS (MODEL_NAME, MODEL_DISPLAY_NAME) VALUES ('cohere.command-a-03-2025', 'Cohere Cmd A');
+      INSERT INTO SELECT_AI_OCI_MODELS (MODEL_NAME, MODEL_DISPLAY_NAME) VALUES ('google.gemini-2.5-flash-lite', 'Gemini 2.5 Flash Lite');
+      INSERT INTO SELECT_AI_OCI_MODELS (MODEL_NAME, MODEL_DISPLAY_NAME) VALUES ('xai.grok-3-mini', 'Grok 3 Mini');
+   
+    
+    --SELECT AI Actions table
+        CREATE TABLE "SELECT_AI_ACTIONS" 
+      (	"ACTION_ID" NUMBER GENERATED BY DEFAULT ON NULL AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  NOT NULL ENABLE, 
+   	"ACTION_NAME" VARCHAR2(25 CHAR), 
+   	 CONSTRAINT "SELECT_AI_ACTIONS_PK" PRIMARY KEY ("ACTION_ID")
+     USING INDEX  ENABLE
+      ) ;
+      
+    --Insert Actions
+      INSERT INTO SELECT_AI_ACTIONS (ACTION_NAME) VALUES ('explainsql');
+      INSERT INTO SELECT_AI_ACTIONS (ACTION_NAME) VALUES ('chat');
+      INSERT INTO SELECT_AI_ACTIONS (ACTION_NAME) VALUES ('narrate');
+      INSERT INTO SELECT_AI_ACTIONS (ACTION_NAME) VALUES ('runsql');
+      INSERT INTO SELECT_AI_ACTIONS (ACTION_NAME) VALUES ('showsql');
+   
+   
+    --Feedback/Audit Table
+         CREATE TABLE "SELECT_AI_FEEDBACK" 
+       (	"SA_ID" NUMBER GENERATED BY DEFAULT ON NULL AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  NOT NULL ENABLE, 
+    	"SA_USER" VARCHAR2(75 CHAR) NOT NULL ENABLE, 
+    	"SA_PROMPT" VARCHAR2(1000 CHAR), 
+    	"SA_RESULTS" VARCHAR2(5000 CHAR), 
+    	"SA_CREATED_ON" TIMESTAMP (6) DEFAULT systimestamp NOT NULL ENABLE, 
+    	"FEEDBACK" VARCHAR2(20 CHAR), 
+    	"SA_PROFILE" VARCHAR2(100), 
+    	"SA_ACTION" VARCHAR2(25), 
+    	 CONSTRAINT "SELECT_AI_Feedback_PK" PRIMARY KEY ("SA_ID")
+      USING INDEX  ENABLE
+       ) ;
+
+
 </details>
 
 <details>
