@@ -104,39 +104,18 @@ ___
     
 </details>
 
-
 ___
 ### Screenshots
- 
-To anyone that stumbled across this section of the repo, apologies for not covering this during the demo.  That was part of the plan, but was running short on time.  I've outlined the steps necessary to setup a re-occurring job that will run your PL/SQL and initiate APEX workflows.
 
-I'll be using the Scheduling service within Database Actions of an Autonomous Data Warehouse 23ai.
+![Database Actions](</APEX/Images/SAI Main App.png> "Home Page")
 
-Start by logging into the database within OCI.  Open up Database Actions and select Scheduling
+![Database Actions](</APEX/Images/SAI Create Profile.png> "Create Profile")
 
-![Database Actions](</APEX/Images/DA - Scheduling.png> "Database Actions")
+![Database Actions](</APEX/Images/SAI Manage Profile.png> "Manage Profile")
 
-Select Create Job
+![Database Actions](</APEX/Images/SAI Run Profile.png> "Run Profile")
 
-![Database Actions](</APEX/Images/DA - Scheduling-Home.png> "Database Actions")
-
-This will open the job details page
-
-![Database Actions](</APEX/Images/Create Job.png> "Database Actions")
-
-Give the job a name and paste your PL/SQL script
-
-![Database Actions](</APEX/Images/Enter Details.png> "Database Actions")
-
-Select Execution Mode
-
-![Database Actions](</APEX/Images/Select Execution Mode.png> "Database Actions")
-
-Configure Schedule
-
-![Database Actions](</APEX/Images/Set up Mode.png> "Database Actions")
-
-At this point, you should be able to save the job and you use the same area to monitor the job to ensure it's running as expected.
+![Database Actions](</APEX/Images/SAI Review Profile.png> "Review Profile")
 
 ___
 
@@ -150,7 +129,7 @@ Below are some links to documentation that we mentioned during the webinar
  - General documentation covering all aspects of SELECT AI. [Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai.html)
    
  #### APEX JSON API (APEX_JSON)
- - General documentation for SELECT AI supporting database views. [Documentation](https://docs.oracle.com/en/database/oracle/apex/24.1/aeapi/APEX_JSON.html)
+ - APEX API Reference. [Documentation](https://docs.oracle.com/en/database/oracle/apex/24.1/aeapi/APEX_JSON.html)
 
 ___
 ### Code Innovate Program
