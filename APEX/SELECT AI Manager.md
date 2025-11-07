@@ -1,12 +1,15 @@
+![Database Actions](</APEX/Images/SAI Main App.png> "Home Page")
+
 Thanks for stopping by!  Continue reading to understand what we covered in our Unlock the Full Potential of Your Oracle AI Database Select AI Profiles session
 
 This session was designed to show how users can quickly develop an APEX app to Create, Manage, Run, and Review their SELECT AI Profiles.
 
 Session link: [Unlock the Full Potential of Your Oracle AI Database Select AI Profiles](https://www.youtube.com/watch?v=nZno-1-k2NY)  
 
-
+___
+### Environment
 #### Database: Autonomous AI Database Lakehouse 26ai
-#### APEX Version: 24.2
+#### APEX Version: 24.2.9
 
 ___
 #### Download APEX Application
@@ -109,9 +112,7 @@ ___
 </details>
 
 ___
-### Screenshots
-
-![Database Actions](</APEX/Images/SAI Main App.png> "Home Page")
+### Additional Screenshots
 
 ![Database Actions](</APEX/Images/SAI Create Profile.png> "Create Profile")
 
