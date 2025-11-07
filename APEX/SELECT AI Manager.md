@@ -125,13 +125,13 @@ ___
 Below are some links to documentation that we mentioned during the webinar
 
 #### Database Credentials
- - Required when working with OCI resources to authenticate the request. [Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-subprograms.html#GUID-742FC365-AA09-48A8-922C-1987795CF36A)
+ - Required when working with OCI resources to authenticate the request [Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-subprograms.html#GUID-742FC365-AA09-48A8-922C-1987795CF36A)
 
 #### SELECT AI Profile Documentation
- - General documentation covering all aspects of SELECT AI. [Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai.html)
+ - General documentation covering all aspects of SELECT AI [Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai.html)
    
  #### APEX JSON API (APEX_JSON)
- - APEX API Reference. [Documentation](https://docs.oracle.com/en/database/oracle/apex/24.1/aeapi/APEX_JSON.html)
+ - APEX API Reference [Documentation](https://docs.oracle.com/en/database/oracle/apex/24.1/aeapi/APEX_JSON.html)
 
 ___
 ### Code Innovate Program
