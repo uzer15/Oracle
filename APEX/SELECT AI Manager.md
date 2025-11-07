@@ -7,6 +7,11 @@ Session link: [Unlock the Full Potential of Your Oracle AI Database Select AI Pr
 
 #### Database: Autonomous AI Database Lakehouse 26ai
 #### APEX Version: 24.2
+
+___
+#### Download APEX Application
+Download SQL File [here](https://github.com/uzer15/Oracle/blob/main/Analytics%20Cloud%20(OAC)/Sample%20Data.xlsx).
+
 ___
 #### Code Snippets
 <details>
