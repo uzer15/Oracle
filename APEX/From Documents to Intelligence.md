@@ -2,6 +2,7 @@ Thanks for stopping by!  Continue reading to understand what we covered in our F
 
 This session was designed to showcase how users can build out the different stages common to document process pipelines.
 
+[YouTube](https://docs.oracle.com/en/database/oracle/apex/24.2/htmdb/workflow-substitution-strings.html#GUID-110A2DE8-0586-45E3-A439-D3D56425FE10)
 
 #### Database: Autonomous AI Data Lakehouse - 26ai
 #### APEX Version: 26.1
