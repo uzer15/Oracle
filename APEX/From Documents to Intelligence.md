@@ -40,17 +40,48 @@ ___
         )
         RETURNING RECORD_ID INTO :P57_DOCUMENT_ID; --Optional method for returning a column value from the row that was just inserted
       END;
+</details>
 
+<details>
   <summary> Object Storage </summary>
  
-    SELECT * FROM DBMS_CLOUD.LIST_OBJECTS('Credential Name','Object Storage URL');
+    SELECT * FROM DBMS_CLOUD.LIST_OBJECTS('<Credential Name>','<Object Storage URL>');
     
-    SELECT * FROM DBMS_CLOUD.LIST_OBJECTS('OCI_SERVICES','https://objectstorage.us-ashburn-1.oraclecloud.com/n/{NameSpace}/b/{Bucket Name}/o/') WHERE object_name like '%.pdf';
+    SELECT * FROM DBMS_CLOUD.LIST_OBJECTS('OCI_Credentials','https://objectstorage.us-ashburn-1.oraclecloud.com/n/<NameSpace>/b/<Bucket Name>/o/') WHERE object_name like '%.pdf';
 
-   Requirements
+   ##### Requirements
 
-    grant execute on DBMS_CLOUD to 'Schema Name'
+    grant execute on DBMS_CLOUD to '<Schema Name>'
+
+   ##### Optional Step.  Add File(s) to Table
+
+    DECLARE
     
+       l_object   blob := null;
+       l_bucket varchar2(4000) := 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/<NameSpace>/b/<Bucket Name>/o/';
+       
+    BEGIN
+       for i in (select * from dbms_cloud.list_objects('OCI_Credentials', l_bucket) where object_name like '%.png') 
+       
+       loop
+          
+          l_object := dbms_cloud.get_object(credential_name => 'OCI_Credentials', object_uri => l_bucket || i.object_name);
+    
+          insert into object_storage_files ( object_storage_file ) values ( l_object );
+    
+       end loop;
+    
+    END;
+    
+</details>
+
+<details>
+  <summary> REST </summary>
+
+##### OCI List Compartments REST endpoint: https://identity.us-ashburn-1.oraclecloud.com/20160918/compartments/
+##### OCI List Buckets REST endpoint: https://objectstorage.us-ashburn-1.oraclecloud.com/n/namespace/b/ (compartmentID as URL query String)
+   
+
 </details>
 
 ___
