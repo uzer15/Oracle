@@ -78,14 +78,46 @@ ___
 <details>
   <summary> REST </summary>
 
-##### OCI List Compartments REST endpoint: https://identity.us-ashburn-1.oraclecloud.com/20160918/compartments/
-##### OCI List Buckets REST endpoint: https://objectstorage.us-ashburn-1.oraclecloud.com/n/namespace/b/ (compartmentID as URL query String)
-   
+##### [OCI List Compartments API](https://docs.oracle.com/en-us/iaas/api/#/en/identity/20160918/Compartment/ListCompartments)
+##### [OCI List Buckets API](https://docs.oracle.com/en-us/iaas/api/#/en/objectstorage/20160918/Bucket/ListBuckets)
+##### [OCI List Objects API](https://docs.oracle.com/en-us/iaas/api/#/en/objectstorage/20160918/Object/ListObjects)
 
 </details>
 
 ___
 #### Extraction
+
+<details>
+  <summary> Extract Text from Text based documents - Database Feature </summary>
+    
+    DECLARE
+      l_document_id   NUMBER;
+      l_document_txt  CLOB;
+    
+    BEGIN
+      l_document_id := :P58_DOCUMENT_ID;
+    
+      UPDATE DOCUMENT_STAGING
+         SET DOCUMENT_TEXT = DBMS_VECTOR_CHAIN.UTL_TO_TEXT(
+             DOCUMENT_FILE,
+             JSON('{
+               "plaintext": "true",
+               "charset"  : "UTF8"
+             }')
+           )
+       WHERE RECORD_ID = l_document_id;
+    
+      SELECT DOCUMENT_TEXT
+        INTO :P58_EXTRACTED_TEXT
+        FROM DOCUMENT_STAGING
+       WHERE RECORD_ID = l_document_id;
+    END;
+
+##### [DBMS_VECTOR_CHAIN Package](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/dbms_vector_chain-vecse.html)
+
+</details>
+
+
 
 ___
 #### Working With JSON
