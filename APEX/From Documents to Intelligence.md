@@ -41,6 +41,16 @@ ___
         RETURNING RECORD_ID INTO :P57_DOCUMENT_ID; --Optional method for returning a column value from the row that was just inserted
       END;
 
+  <summary> Object Storage </summary>
+ 
+    SELECT * FROM DBMS_CLOUD.LIST_OBJECTS('Credential Name','Object Storage URL');
+    
+    SELECT * FROM DBMS_CLOUD.LIST_OBJECTS('OCI_SERVICES','https://objectstorage.us-ashburn-1.oraclecloud.com/n/{NameSpace}/b/{Bucket Name}/o/') WHERE object_name like '%.pdf';
+
+   Requirements
+
+    grant execute on DBMS_CLOUD to 'Schema Name'
+    
 </details>
 
 ___
