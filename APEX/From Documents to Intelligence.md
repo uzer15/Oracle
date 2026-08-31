@@ -1,6 +1,6 @@
-Thanks for stopping by!  Continue reading to understand what we covered in our Extending APEX Workflows.  
+Thanks for stopping by!  Continue reading to understand what we covered in our From Documents to Intelligence - 26ai Through the lens of APEX.  
 
-This session was designed to showcase how users can interact with APEX outside of an application.
+This session was designed to showcase how users can build out the different stages common to document process pipelines.
 
 
 #### Database: Autonomous AI Data Lakehouse - 26ai
