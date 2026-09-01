@@ -47,7 +47,7 @@ ___
  
     SELECT * FROM DBMS_CLOUD.LIST_OBJECTS('<Credential Name>','<Object Storage URL>');
     
-    SELECT * FROM DBMS_CLOUD.LIST_OBJECTS('OCI_Credentials','https://objectstorage.us-ashburn-1.oraclecloud.com/n/<NameSpace>/b/<Bucket Name>/o/') WHERE object_name like '%.pdf';
+    SELECT * FROM DBMS_CLOUD.LIST_OBJECTS('OCI_Credentials','https://objectstorage.us-ashburn-1.oraclecloud.com/n/<Namespace>/b/<Bucket Name>/o/') WHERE object_name like '%.pdf';
 
    ##### Requirements
 
@@ -117,10 +117,87 @@ ___
 
 </details>
 
+<details>
+  <summary> Document Understanding </summary>
+
+##### Example Request Body template
+
+    {
+     
+      "features": [
+        {
+          "featureType": "#FEATURETYPE#"
+        }
+      ],
+    
+    "document": {
+      "source": "OBJECT_STORAGE",
+      "namespaceName": "<Namespace>",
+      "bucketName": "#BUCKET#",
+      "objectName": "#FILENAME#"
+    },
+    "compartmentId": "#COMPARTMENT#"
+    }
+
+Note:  Any element surrounded by # indicates it's an Operational Parameter that will be sent in when the request is made.
+
+
+##### [Document Understanding API](https://docs.oracle.com/en-us/iaas/api/#/en/document-understanding/20221109/datatypes/AnalyzeDocumentDetails)
+
+</details>
 
 
 ___
 #### Working With JSON
+
+<details>
+  <summary> Working with JSON - JSON_TABLE </summary>
+
+    SELECT
+      inv.INVOICE_NUM,
+      inv.INVOICE_DATE,
+      inv.INVOICE_AMOUNT,
+      inv.INVOICED_BY,
+      li.sku,
+      li.description,
+      li.amount,
+      li.quantity
+    
+    FROM INVOICE_JSON_COLLECTIONS inv,
+         JSON_TABLE(
+           inv.INVOICE_LINE_ITEMS,
+           '$[*]'
+           COLUMNS (
+             sku         VARCHAR2(30)  PATH '$.itemSkuNumber',
+             description VARCHAR2(100) PATH '$.itemDescription',
+             amount      NUMBER       PATH '$.itemAmount',
+             quantity    NUMBER(10,2) PATH '$.itemQuantity'
+           )
+         ) li;
+
+##### [JSON_TABLE Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/adjsn/function-JSON_TABLE.html#GUID-0172660F-CE29-4765-BF2C-C405BDE8369A)
+
+</details>
+
+<details>
+  <summary> Working with JSON - JSON_TABLE </summary>
+
+    SELECT 
+        JSON_VALUE(:P59_JSON_RESPONSE_RAW, '$.modelId'),
+        JSON_VALUE(:P59_JSON_RESPONSE_RAW, '$.modelVersion'),
+        JSON_VALUE(:P59_JSON_RESPONSE_RAW, '$.chatResponse.choices.message.content.text'),
+        JSON_VALUE(:P59_JSON_RESPONSE_RAW, '$.chatResponse.usage.completionTokens'),
+        JSON_VALUE(:P59_JSON_RESPONSE_RAW, '$.chatResponse.usage.promptTokens')
+    INTO 
+        :P59_MODEL_ID,
+        :P59_MODEL_VERSION,
+        :P59_RESPONSE_TEXT,
+        :P59_RESPONSE_TOKENS,
+        :P59_PROMPT_TOKENS;
+
+##### [JSON_VALUE Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/adjsn/function-JSON_VALUE.html)
+
+</details>
 
 ___
 #### Processing & Validation
