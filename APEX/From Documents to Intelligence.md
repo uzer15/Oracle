@@ -388,13 +388,51 @@ REMINDER: These are the same tools that would be exposed to a MCP server
 </details>
 
 ___
-### Querying - SELECT AI
+### Querying
 
-___
-### Querying - Vectors
+<details>
+  <summary> SELECT AI </summary>
 
-___
-### Querying - Agents
+##### Profile Example
+
+    BEGIN
+        DBMS_CLOUD_AI.CREATE_PROFILE(
+            profile_name => 'SALES',
+            attributes =>
+                '{"provider": "oci",
+                "credential_name": "My Credential", 
+                "comments":true,
+                "conversation":true,
+                "region":"us-chicago-1",
+                "oci_compartment_id":"ocid1.compartment.oc1..aaaaaaaac......",
+                "model":"meta.llama-3.1-405b-instruct",
+                "object_list": [{"owner": "SH", "name": "SALES"},
+                    {"owner": "SH", "name": "TIMES"},
+                    {"owner": "SH", "name": "CUSTOMERS"},
+                    {"owner": "SH", "name": "PRODUCTS"},
+                    {"owner": "SH", "name": "PROMOTIONS"},
+                    {"owner": "SH", "name": "CHANNELS"}
+                    ]
+                }'
+        );
+    END;
+
+##### [Documentation](https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/select-ai-manage-profiles.html)
+
+
+</details>
+
+<details>
+  <summary> Vectors </summary>
+ 
+
+</details>
+
+<details>
+  <summary> Agents </summary>
+ 
+
+</details>
 
 ___
 ### Code Innovate Program
