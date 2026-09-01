@@ -385,22 +385,14 @@ REMINDER: These are the same tools that would be exposed to a MCP server
 
 </details>
 
-
-
 ___
 ### Querying - SELECT AI
 
 ___
 ### Querying - Vectors
 
-
 ___
 ### Querying - Agents
-
-___
-### Previous Examples
-
-
 
 ___
 ### Code Innovate Program
