@@ -6,8 +6,10 @@ This session was designed to showcase how users can build out the different stag
 
 #### Database: Autonomous AI Data Lakehouse - 26ai
 #### APEX Version: 26.1
-
+#### Recorded on: 08/27/26
+#### Presented by: Pete Midura - Data & AI Architect
 [Webinar](www.youtube.com)
+
 ___
 ### Working With Files
 <details>
