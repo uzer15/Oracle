@@ -7,7 +7,7 @@ This session was designed to showcase how users can build out the different stag
 #### Database: Autonomous AI Data Lakehouse - 26ai
 #### APEX Version: 26.1
 
-[YouTube](www.youtube.com)
+[Webinar](www.youtube.com)
 ___
 ### Working With Files
 <details>
