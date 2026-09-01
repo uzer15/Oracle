@@ -1,4 +1,4 @@
-Thanks for stopping by!  Continue reading to understand what we covered in our From Documents to Intelligence - 26ai Through the lens of APEX.  
+Thanks for stopping by!  Continue reading to understand what we covered in the: From Documents to Intelligence - 26ai Through the lens of APEX.  
 
 This session was designed to showcase how users can build out the different stages common to document process pipelines.
 
