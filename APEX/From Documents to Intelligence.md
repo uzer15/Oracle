@@ -151,7 +151,7 @@ ___
 ### Working With JSON
 
 <details>
-  <summary> Working with JSON - JSON_TABLE </summary>
+  <summary> JSON_TABLE </summary>
 
     SELECT
       inv.INVOICE_NUM,
@@ -174,13 +174,13 @@ ___
              quantity    NUMBER(10,2) PATH '$.itemQuantity'
            )
          ) li;
-
 ##### [JSON_TABLE Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/adjsn/function-JSON_TABLE.html#GUID-0172660F-CE29-4765-BF2C-C405BDE8369A)
 
 </details>
 
+
 <details>
-  <summary> Working with JSON - JSON_TABLE </summary>
+  <summary> JSON_VALUE </summary>
 
     SELECT 
         JSON_VALUE(:P59_JSON_RESPONSE_RAW, '$.modelId'),
@@ -194,13 +194,198 @@ ___
         :P59_RESPONSE_TEXT,
         :P59_RESPONSE_TOKENS,
         :P59_PROMPT_TOKENS;
-
 ##### [JSON_VALUE Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/adjsn/function-JSON_VALUE.html)
 
 </details>
 
+
 ___
 ### Processing & Validation
+
+<details>
+  <summary> Agent Development </summary>
+
+##### During this portion of the webinar, we focused on database agent development and monitoring
+ 
+##### [DBMS_CLOUD_AI_AGENT Package](https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/dbms-cloud-ai-agent-package.html#GUID-39C4A94B-C07A-4A76-8412-BEEA667C259B)
+
+##### [Practical Examples](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/examples-using-select-ai-agent.html#GUID-DA69F925-A3F4-4990-A229-7A1D368C6001)
+
+</details>
+
+<details>
+  <summary> Create a Tool </summary>
+ 
+      BEGIN
+        DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
+          tool_name   => 'SALES_SQL_TOOL',
+          attributes  => '{
+            "tool_type": "SQL",
+            "tool_params": {
+              "profile_name": "SALES_NL2SQL_PROFILE"
+            }
+          }',
+          description => 'Answers sales-data questions using the approved NL2SQL profile'
+        );
+      END;
+
+REMINDER: These are the same tools that would be exposed to a MCP server
+
+</details>
+
+<details>
+  <summary> Create a Task </summary>
+ 
+    BEGIN
+      DBMS_CLOUD_AI_AGENT.CREATE_TASK(
+        task_name  => 'ANALYZE_SALES_TASK',
+        attributes => q'~{
+          "instruction": "Answer the user's sales question: {query}. Use the sales SQL tool. Summarize the result clearly and identify any material trends.",
+          "tools": ["SALES_SQL_TOOL"],
+          "enable_human_tool": true
+        }~',
+        description => 'Analyzes sales data and explains the results'
+      );
+    END;
+    /
+
+</details>
+
+<details>
+  <summary> Create an Agent </summary>
+ 
+    BEGIN
+      DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
+        agent_name  => 'SALES_ANALYST_AGENT',
+        attributes  => q'~{
+          "profile_name": "SALES_AGENT_PROFILE",
+          "role": "You are a sales analyst. Provide accurate, concise, business-friendly answers grounded in approved sales data.",
+          "enable_human_tool": true,
+          "short_term_memory_length": 10
+        }~',
+        description => 'Explains sales performance using approved database data'
+      );
+    END;
+    /
+
+</details>
+
+<details>
+  <summary> Create an Agent Team </summary>
+ 
+    BEGIN
+      DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
+        team_name  => 'SALES_ANALYTICS_TEAM',
+        attributes => '{
+          "agents": [
+            {
+              "name": "SALES_ANALYST_AGENT",
+              "task": "ANALYZE_SALES_TASK"
+            }
+          ],
+          "process": "sequential"
+        }',
+        description => 'Answers sales questions using the sales analyst agent'
+      );
+    END;
+    /
+
+</details>
+
+<details>
+  <summary> Create a Conversation </summary>
+
+    SELECT DBMS_CLOUD_AI.CREATE_CONVERSATION(
+                   attributes => '{"title":"Conversation 1",
+                                   "description":"this is a description",
+                                   "retention_days":5,
+                                   "conversation_length":5}')
+         AS conversation_id FROM dual;
+
+</details>
+
+<details>
+  <summary> Run an Agent Team </summary>
+
+ DECLARE
+
+    l_conversation_id varchar2(200);
+    l_final_answer clob;
+  
+  
+    BEGIN
+  
+      if :P75_CONV_ID IS Null THEN
+          l_conversation_id :=DBMS_CLOUD_AI.create_conversation();
+          SELECT l_conversation_id INTO :P75_CONV_ID;
+          else
+          l_conversation_id := :P75_CONV_ID;
+  
+      END if;
+  
+      l_final_answer := DBMS_CLOUD_AI_AGENT.RUN_TEAM(
+        team_name => :P75_SELECT_TEAM,
+        user_prompt => :P75_PROMPT,
+        params => '{"conversation_id": "' ||l_conversation_id || '"}'
+      );
+  
+      :P75_PROMPT := null;
+  
+    END;
+
+</details>
+
+<details>
+  <summary> Multi-Agent Patterns </summary>
+ 
+##### [Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/multi-agent-pattern-ai-agents.html)
+
+</details>
+
+<details>
+  <summary> Observability </summary>
+ 
+##### DBMS_CLOUD_AI_AGENT views
+
+    -- DBA views
+    SELECT * FROM DBA_AI_AGENTS;  --The view display agents created by all users inside their database.
+    SELECT * FROM DBA_AI_AGENT_ATTRIBUTES; --The view displays attributes of the agents created by all users inside their database. 
+    SELECT * FROM DBA_AI_AGENT_TOOLS;  --The view displays details of the tools created by all users inside their database.
+    SELECT * FROM DBA_AI_AGENT_TOOL_ATTRIBUTES;  --The view displays attributes of tools created by all users inside their database. 
+    SELECT * FROM DBA_AI_AGENT_TASKS;  --The view display tasks created by all users inside their database.
+    SELECT * FROM DBA_AI_AGENT_TASK_ATTRIBUTES;  --The view displays attributes of tasks created by all users inside their database.
+    SELECT * FROM DBA_AI_AGENT_TEAMS;  --The view displays details of the teams created by all users inside their database.
+    SELECT * FROM DBA_AI_AGENT_TEAM_ATTRIBUTES;  --The view displays attributes of teams created by all users inside their database. 
+    
+    --  USER views 
+    SELECT * FROM USER_AI_AGENTS;  --The view displays details on conversations in your schema.
+    SELECT * FROM USER_AI_AGENT_ATTRIBUTES;  --The view displays attributes of agents created by the current user inside their schema
+    SELECT * FROM USER_AI_AGENT_TOOLS;  --The view displays details tools created by the current user inside their schema. 
+    SELECT * FROM USER_AI_AGENT_TOOL_ATTRIBUTES;  --The view displays attributes of tools created by the current user inside their schema.
+    SELECT * FROM USER_AI_AGENT_TASKS;  --The view displays details on tasks created by the current user inside their schema
+    SELECT * FROM USER_AI_AGENT_TASK_ATTRIBUTES;  --The view displays attributes of tasks created by the current user inside their schema. 
+    SELECT * FROM USER_AI_AGENT_TEAMS;  --The view displays details on teams created by the current user inside their schema.
+    SELECT * FROM USER_AI_AGENT_TEAM_ATTRIBUTES;  --The view displays details of attributes of teams created by the current user inside their schema.
+    
+    /* DBMS_CLOUD_AI_AGENT history views */
+    
+    --  DBA views
+    SELECT * FROM DBA_AI_AGENT_TEAM_HISTORY;  --The view displays all agent team-runs across the system.
+    SELECT * FROM DBA_AI_AGENT_TASK_HISTORY;  --This view shows agent task parameters within a team.
+    SELECT * FROM DBA_AI_AGENT_TOOL_HISTORY;  --This view lists calls to tools across the system.
+    
+    --  USER views
+    SELECT * FROM USER_AI_AGENT_TEAM_HISTORY;  --The view displays all agent team runs for teams owned by the current user.
+    SELECT * FROM USER_AI_AGENT_TASK_HISTORY;  --This view shows agent task parameters for the current user’s teams.
+    SELECT * FROM USER_AI_AGENT_TOOL_HISTORY;  --This view lists calls to tools the current user owns.
+    
+    -- Conversation Views
+    select * from user_cloud_ai_conversations ORDER BY CREATED ASC; --The view displays details on conversations in your schema.
+    select * from user_cloud_ai_conversation_prompts ORDER BY CREATED ASC; --The view displays details on prompts used in conversations in your schema.
+
+</details>
+
+
 
 ___
 ### Querying - SELECT AI
