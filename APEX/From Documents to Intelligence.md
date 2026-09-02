@@ -393,6 +393,8 @@ ___
 <details>
   <summary> SELECT AI </summary>
 
+![Home](</APEX/Images/AppHome.png> "Demo Application Home Page")
+
 ##### Profile Example
 
     BEGIN
