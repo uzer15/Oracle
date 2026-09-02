@@ -519,10 +519,10 @@ Note: There are several methods for converting text/files into Vectors, but I op
 <details>
   <summary> Agents </summary>
 
- During this portion of the webinar, I wanted to show how to monitor Agent Team conversations that have a Human in the loop.
+
+ ##### During this portion of the webinar, I wanted to show how to monitor Agent Team conversations that have a Human in the loop.
 
  ##### Create Agent example w/ Human in the Loop
-  <summary> Create an Agent </summary>
  
     BEGIN
       DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
@@ -537,7 +537,7 @@ Note: There are several methods for converting text/files into Vectors, but I op
       );
     END;
 
-Use the following system views to monitor 'Open' conversations.
+##### Use the following system views to monitor 'Open' conversations.
 
     USER_AI_AGENT_TEAM_HISTORY
     USER_AI_AGENT_TASK_HISTORY
