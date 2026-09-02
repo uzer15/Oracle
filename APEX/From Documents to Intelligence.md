@@ -392,6 +392,9 @@ ___
 <details>
   <summary> SELECT AI </summary>
 
+##### Requirements
+    grant execute on DBMS_CLOUD_AI to 'Schema Name'
+
 ![Home](</APEX/Images/SELECT AI Actions.png> "Demo Application Home Page")
 
 ##### Profile Example
@@ -442,20 +445,106 @@ ___
     from user_CLOUD_AI_PROFILES a, USER_CLOUD_AI_PROFILE_ATTRIBUTES b
     where a.profile_id = b.profile_id;
 
-##### Requirements
-    grant execute on DBMS_CLOUD_AI to 'Schema Name'
-
 </details>
 
 <details>
   <summary> Vectors </summary>
- 
+
+ ##### Requirements
+
+    grant execute on DBMS_CLOUD_AI to 'Schema Name';
+    grant execute on DBMS_VECTOR to 'Schema Name';
+    grant execute on DBMS_VECTOR_CHAIN to 'Schema Name';
+
+##### DBMS_Vector
+[Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/arpls/dbms_vector1.html)
+
+##### DBMS_VECTOR_CHAIN
+[Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/arpls/dbms_vector_chain1.html)
+
+##### Create VECTOR Column
+
+    ALTER TABLE <Table Name>
+      ADD (
+        <Column Name> VECTOR
+      );
+
+##### Create Vector Example
+
+    select dbms_vector_chain.utl_to_embedding('Enter text to be embedded here!', 
+     json('{
+       "provider": "<Provider>",
+       "credential_name": "<Credential Name>",
+       "url": "https://inference.generativeai.us-chicago-1.oci.oraclecloud.com/20231130/actions/embedText",
+       "model": "cohere.embed-v4.0",  --Embedding Model
+       "batch_size":10 
+     }')) embed_vector
+
+##### Vector Distance Search
+
+    SELECT
+        <column1>,
+        VECTOR_DISTANCE(
+            description_vector,  --Vector Column or Variable
+            Convert_prompt_to_Vector(:P73_VECTOR_PROMPT),  --User prompt which will be converted into vector for comparison using VECTOR_DISTANCE function
+            COSINE
+        ) AS distance
+    FROM report_directory
+    ORDER BY VECTOR_DISTANCE(
+        description_vector,
+        Convert_prompt_to_Vector(:P73_VECTOR_PROMPT),
+        COSINE
+    )
+    FETCH FIRST 3 ROWS ONLY;
+
+##### Example function to convert objects into Vectors.  
+
+Note: There are several methods for converting text/files into Vectors, but I opted to create a function.
+
+    create or replace FUNCTION Convert_prompt_to_Vector (p_prompt varchar2)
+        RETURN VECTOR IS
+    BEGIN
+        RETURN dbms_vector_chain.utl_to_embedding(p_prompt, json('{
+                      "provider": "<provider>",
+                      "credential_name": "<Credentials>",
+                      "url": "https://inference.generativeai.us-chicago-1.oci.oraclecloud.com/20231130/actions/embedText",
+                      "model": "cohere.embed-v4.0",
+                      "batch_size":50
+                    }'));
+    END;
+    /
 
 </details>
 
 <details>
   <summary> Agents </summary>
+
+ During this portion of the webinar, I wanted to show how to monitor Agent Team conversations that have a Human in the loop.
+
+ ##### Create Agent example w/ Human in the Loop
+  <summary> Create an Agent </summary>
  
+    BEGIN
+      DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
+        agent_name  => 'SALES_ANALYST_AGENT',
+        attributes  => q'~{
+          "profile_name": "SALES_AGENT_PROFILE",
+          "role": "You are a sales analyst. Provide accurate, concise, business-friendly answers grounded in approved sales data.",
+          "enable_human_tool": true,
+          "short_term_memory_length": 10
+        }~',
+        description => 'Explains sales performance using approved database data'
+      );
+    END;
+
+Use the following system views to monitor 'Open' conversations.
+
+    USER_AI_AGENT_TEAM_HISTORY
+    USER_AI_AGENT_TASK_HISTORY
+
+##### Example of how this is displayed
+
+ ![Home](</APEX/Images/SELECT AI Actions.png> "Demo Application Home Page")
 
 </details>
 
