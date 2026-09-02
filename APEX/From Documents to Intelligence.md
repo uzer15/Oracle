@@ -544,7 +544,7 @@ Use the following system views to monitor 'Open' conversations.
 
 ##### Example of how this is displayed
 
- ![Home](</APEX/Images/SELECT AI Actions.png> "Demo Application Home Page")
+ ![Home](</APEX/Images/Agent - Human.png> "Status: Waiting for Human")
 
 </details>
 
