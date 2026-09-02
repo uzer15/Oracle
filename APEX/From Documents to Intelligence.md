@@ -393,7 +393,7 @@ ___
 <details>
   <summary> SELECT AI </summary>
 
-![Home](</APEX/Images/AppHome.png> "Demo Application Home Page")
+![Home](</APEX/Images/SELECT AI Actions.png> "Demo Application Home Page")
 
 ##### Profile Example
 
@@ -421,6 +421,30 @@ ___
 
 ##### [Documentation](https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/select-ai-manage-profiles.html)
 
+##### Run Profile
+
+    BEGIN
+      SELECT DBMS_CLOUD_AI.GENERATE(:P72_SELECTAI_PROMPT, -- User Prompt
+               profile_name => :P72_SELECTAI_PROFILES, -- SELECT AI Profile
+               action       => :P72_SELECTAI_ACTION -- SELECT AI Action
+             )
+        INTO :P72_SELECTAI_RESPONSE --Insert Response into APEX page item
+        FROM DUAL;
+    END;
+
+##### System Views
+
+    SELECT * FROM USER_CLOUD_AI_PROFILES
+    SELECT * FROM USER_CLOUD_AI_PROFILE_ATTRIBUTES 
+    
+    --Joining both views
+    
+    select a.profile_name, a.status, b.attribute_name, b.attribute_value 
+    from user_CLOUD_AI_PROFILES a, USER_CLOUD_AI_PROFILE_ATTRIBUTES b
+    where a.profile_id = b.profile_id;
+
+##### Requirements
+    grant execute on DBMS_CLOUD_AI to 'Schema Name'
 
 </details>
 
