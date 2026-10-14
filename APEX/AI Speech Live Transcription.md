@@ -1,5 +1,17 @@
 Thanks for stopping by!  Continue reading to understand what we covered in our OCI AI Speech Live Transcription service integration with APEX.  
 
+
+This session was designed to show how users can quickly develop an APEX app to Create, Manage, Run, and Review their SELECT AI Profiles.
+
+![Database Actions](</APEX/Images/Speech_App.png> "Home Page")
+___
+### Recorded Session
+[Unlock the Full Potential of Your Oracle AI Database Select AI Profiles](https://www.youtube.com/watch?v=nZno-1-k2NY)  
+___
+### Download APEX Application
+[Download](https://github.com/uzer15/Oracle/blob/main/APEX/Apps/SELECT_AI_Manager.sql)
+___
+
 #### Database: Autonomous AI Database 26ai (Lakehouse) 
 #### APEX Version: 26.1.5
 #### Recorded on: 10/14/26
