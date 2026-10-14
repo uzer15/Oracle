@@ -90,8 +90,13 @@ ___
      
 </details>
     
-    
-    
+![Architecture](</APEX/Images/Notional Architecture.png> "Home Page")
+
+___
+### Links to Documentation
+[OCI AI Speech Live Transcription Documentation](https://docs.oracle.com/en-us/iaas/Content/speech/using/using-live-transcribe.htm)  
+[OCI AI Speech Live Transcription API](https://docs.oracle.com/en-us/iaas/tools/python/latest/api/ai_speech/models/oci.ai_speech.models.RealtimeSessionToken.html)  
+
     
     
     
