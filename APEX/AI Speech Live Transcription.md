@@ -6,7 +6,7 @@ ___
 [Oracle AI Speech Live Transcription - APEX Application Integration](https://www.youtube.com/watch?v=nZno-1-k2NY)  
 ___
 ### Download APEX Application
-[Download](APEX/Apps/OCI AI Speech App.sql)
+[Download](https://github.com/uzer15/Oracle/blob/main/APEX/Apps/OCI_AI_Speech_App.sql)
 ___
 
 #### Database: Autonomous AI Database 26ai (Lakehouse) 
