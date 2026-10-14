@@ -1,3 +1,14 @@
+Thanks for stopping by!  Continue reading to understand what we covered in our OCI AI Speech Live Transcription service integration with APEX.  
+
+#### Database: Autonomous AI Database 26ai (Lakehouse) 
+#### APEX Version: 26.1.5
+#### Recorded on: 10/14/26
+#### Developed by: Pete Midura
+___
+#### Code Snippets
+<details>
+ <summary> DDL for the Segments Table </summary>
+
     CREATE TABLE "SPEECH_TRANSCRIPT_SEGMENT" 
      (	"RECORDING_ID" VARCHAR2(64 CHAR) NOT NULL ENABLE, 
     "SEGMENT_NO" NUMBER NOT NULL ENABLE, 
@@ -8,8 +19,11 @@
      CONSTRAINT "SPEECH_TRANSCRIPT_SEGMENT_PK" PRIMARY KEY ("RECORDING_ID", "SEGMENT_NO")
     USING INDEX  ENABLE
      ) ;
+     
+</details>
 
-
+<details>
+ <summary> DDL for Database View to rollup segments into a single transcript </summary>
 
     CREATE OR REPLACE FORCE EDITIONABLE VIEW "SPEECH_RECORDING_V" ("RECORDING_ID", "CREATED_BY", "RECORDING_START_TIME", "RECORDING_END_TIME", "RECORDING_ELAPSED_TIME", "COMPLETE_TRANSCRIPT") AS 
     with recording_data as (
@@ -64,3 +78,19 @@
   
       complete_transcript
     from recording_data;
+     
+</details>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
