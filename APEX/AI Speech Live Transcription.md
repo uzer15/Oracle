@@ -3,7 +3,7 @@ Thanks for stopping by!  Continue reading to understand what we covered in our O
 ![Welcome](</APEX/Images/Speech_pptx.png> "Home Page")
 ___
 ### Recorded Session
-[Oracle AI Speech Live Transcription - APEX Application Integration](https://www.youtube.com/watch?v=nZno-1-k2NY)  
+[Oracle AI Speech Live Transcription - APEX Application Integration](https://www.youtube.com/watch?v=qikRMfJ7oMI)  
 ___
 ### Download APEX Application
 [Download](https://github.com/uzer15/Oracle/blob/main/APEX/Apps/OCI_AI_Speech_App.sql)
